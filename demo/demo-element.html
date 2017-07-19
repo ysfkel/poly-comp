@@ -8,7 +8,7 @@
     <style>
       :host {
         font-family: sans-serif;
-      };
+      }
     </style>
   
     <h3>Statically-configured icon-toggles</h3>
@@ -27,13 +27,13 @@
 
   <script>
     class DemoElement extends Polymer.Element {
-      static get is() { return "demo-element" }
+      static get is() { return 'demo-element' }
       _message(fav) {
         if (fav) {
-          return "You really like me!";
+          return 'You really like me!';
         } 
         else {
-          return "Do you like me?";
+          return 'Do you like me?';
         }
       }
     }
