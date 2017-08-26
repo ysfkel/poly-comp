@@ -1,0 +1,72 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/mixins/gesture-event-listeners.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+
+<dom-module id="icon-toggle">
+
+    <template>
+
+    <style>
+      /* shadow DOM styles go here */
+      
+
+       /* shadow DOM styles go here */
+      :host {
+        display: inline-block;
+      }
+      iron-icon {
+        fill: rgba(0,0,0,0);
+        stroke: currentcolor;
+      }
+      :host([pressed]) iron-icon {
+        fill: currentcolor;
+      }
+
+    </style>
+
+    <!-- shadow DOM goes here -->
+   <iron-icon icon="[[toggleIcon]]"></iron-icon>
+   <input type="" name="" on-change="changed">
+  </template>
+
+    <script>
+        class IconToggle extends Polymer.GestureEventListeners(Polymer.Element) {
+            static get is() {
+                return 'icon-toggle';
+            }
+
+            static get properties() {
+                return {
+                    pressed: {
+                        type: Boolean,
+                        notify: true,
+                        reflectToAttribute: true,
+                        value: false
+                    },
+                    toggleIcon: {
+                        type: String
+                    }
+                }
+            }
+            toggle() {
+                this.pressed = !this.pressed
+            }
+            constructor() {
+                super();
+                this.addEventListener('tap', 'toggle')
+                Polymer.Gestures.addListener(this, 'tap', () => this.toggle())
+            }
+
+            changed(e) {
+                console.log('--value', e)
+                this.dispatchEvent(new CustomEvent('kick', {
+                    detail: {
+                        kicked: true
+                    }
+                }));
+            }
+        }
+        customElements.define(IconToggle.is, IconToggle);
+    </script>
+
+</dom-module>
